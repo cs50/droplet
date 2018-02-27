@@ -3695,6 +3695,7 @@ hook 'keydown', 0, (event, state) ->
     next = @getCursor().next ? @getCursor().end?.next
     @setCursor next, ((token) -> token.type is 'socketStart'), 'after'
   event.preventDefault()
+  event.stopPropagation()
 
 Editor::deleteAtCursor = ->
   if @getCursor().type is 'blockEnd'
