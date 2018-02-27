@@ -113,10 +113,7 @@ RULES = {
   'initDeclaratorList': 'skip'
   'declaration': (node) ->
     # Don't add any buttons if declaration is a typedef
-    try 
-        descendant = node.children[0].children[0].children[0].children[0]
-    unless error?
-        return 'block' if descendant.type is 'Typedef'
+    return 'block' if node.children[0]?.children[0]?.children[0]?.children[0]?.type is 'Typedef'
 
     if node.children.length is 3 and node.children[1].children.length is 3
       return {type: 'block', buttons: BOTH_BUTTON}
