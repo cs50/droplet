@@ -341,14 +341,14 @@ SHAPE_RULES = {
 }
 
 NATIVE_TYPES =[
-  'int'
+  'bool'
   'char'
   'double'
-  'long long'
-  'string'
-  'bool'
   'FILE'
   'float'
+  'int'
+  'long'
+  'string'
 ]
 DROPDOWNS = {
   'specifierQualifierList': NATIVE_TYPES
