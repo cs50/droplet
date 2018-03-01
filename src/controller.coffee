@@ -219,7 +219,7 @@ exports.Editor = class Editor
 
     @options = helper.deepCopy @options
 
-    @options.blockBackspaceEnabled ?= true
+    @options?.blockBackspaceEnabled ?= true
 
     @paletteWidth = @options?.paletteWidth ? DEFAULT_PALETTE_WIDTH
 
