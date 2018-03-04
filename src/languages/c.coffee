@@ -233,7 +233,6 @@ RULES = {
     else if node.children.every((child) -> child.children[0].type isnt 'typeSpecifier' or child.children[0].children[0].children.length is 0)
       'socket'
     else
-      console.log node.children[0].children[0].type, node.children[0].children[0].children
       'block'
 
   'declarationSpecifiers2': (node) ->
