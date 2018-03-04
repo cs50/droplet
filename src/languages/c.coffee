@@ -112,6 +112,9 @@ RULES = {
   'initDeclarator': 'skip',
   'initDeclaratorList': 'skip'
   'declaration': (node) ->
+    # Don't add any buttons if declaration is a typedef
+    return 'block' if node.children[0]?.children[0]?.children[0]?.children[0]?.type is 'Typedef'
+
     if node.children.length is 3 and node.children[1].children.length is 3
       return {type: 'block', buttons: BOTH_BUTTON}
     else if node.children.length is 3
@@ -230,7 +233,6 @@ RULES = {
     else if node.children.every((child) -> child.children[0].type isnt 'typeSpecifier' or child.children[0].children[0].children.length is 0)
       'socket'
     else
-      console.log node.children[0].children[0].type, node.children[0].children[0].children
       'block'
 
   'declarationSpecifiers2': (node) ->
@@ -338,14 +340,14 @@ SHAPE_RULES = {
 }
 
 NATIVE_TYPES =[
-  'int'
+  'bool'
   'char'
   'double'
-  'long long'
-  'string'
-  'bool'
   'FILE'
   'float'
+  'int'
+  'long'
+  'string'
 ]
 DROPDOWNS = {
   'specifierQualifierList': NATIVE_TYPES
