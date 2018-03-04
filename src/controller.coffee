@@ -195,9 +195,6 @@ class Session
     # Empty the undo stacks (TODO: possibly just filter out operations that have to do with the floating blocks we removed)
     @undoStack.length = @redoStack.length = 0
 
-    if @cursor.document isnt 0
-      @cursor = @toCrossDocumentLocation @tree.start
-
     # TODO after droplet/registry merge, we need to filter the registry here, too.
     @floatingBlocks = array.map((object) =>
       new FloatingBlockRecord(
@@ -896,7 +893,8 @@ Editor::redrawMain = (opts = {}) ->
       }
 
     # Draw the cursor (if exists, and is inserted)
-    @redrawCursors(); @redrawHighlights()
+    @redrawCursors()
+    @redrawHighlights()
     @resizeGutter()
 
     for binding in editorBindings.redraw_main
