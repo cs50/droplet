@@ -474,6 +474,7 @@ exports.Editor = class Editor
 
     # Update session for inversion
     if @session? and @session.view.opts.invert
+      @dropletElement.style.backgroundColor = '#181818'
       @paletteWrapper.style.backgroundColor = '#181818'
       @paletteWrapper.style.color = '#FFF'
       @mainCanvas.style.backgroundColor = '#181818'
@@ -483,6 +484,7 @@ exports.Editor = class Editor
       @gutter.style.color = '#EEE'
       @setTopNubbyStyle 10, '#303130'
     else
+      @dropletElement.style.backgroundColor = '#FFF'
       @paletteWrapper.style.backgroundColor = '#FFF'
       @paletteWrapper.style.color = '#000'
       @mainCanvas.style.backgroundColor = '#FFF'
@@ -633,6 +635,7 @@ exports.Editor = class Editor
     return unless session?
 
     if @session.view.opts.invert
+      @dropletElement.style.backgroundColor = '#181818'
       @paletteWrapper.style.backgroundColor = '#181818'
       @paletteWrapper.style.color = '#FFF'
       @mainCanvas.style.backgroundColor = '#181818'
@@ -642,6 +645,7 @@ exports.Editor = class Editor
       @gutter.style.color = '#EEE'
       @setTopNubbyStyle 10, '#303130'
     else
+      @dropletElement.style.backgroundColor = '#FFF'
       @paletteWrapper.style.backgroundColor = '#FFF'
       @paletteWrapper.style.color = '#000'
       @mainCanvas.style.backgroundColor = '#FFF'
