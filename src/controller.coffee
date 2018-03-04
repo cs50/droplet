@@ -277,6 +277,7 @@ exports.Editor = class Editor
 
     @dropletElement.style.left = @paletteWrapper.clientWidth + 'px'
 
+
     do @draw.refreshFontCapital
 
     @standardViewSettings =
@@ -473,27 +474,7 @@ exports.Editor = class Editor
       @setEditorState useBlockMode, false, false, false
 
     # Update session for inversion
-    if @session? and @session.view.opts.invert
-      @dropletElement.style.backgroundColor = '#181818'
-      @paletteWrapper.style.backgroundColor = '#181818'
-      @paletteWrapper.style.color = '#FFF'
-      @mainCanvas.style.backgroundColor = '#181818'
-      @paletteCanvas.style.backgroundColor = '#181818'
-      @cursorPath.element.setAttribute 'stroke', '#FFF'
-      @gutter.style.backgroundColor = '#303130'
-      @gutter.style.color = '#EEE'
-      @setTopNubbyStyle 10, '#303130'
-    else
-      @dropletElement.style.backgroundColor = '#FFF'
-      @paletteWrapper.style.backgroundColor = '#FFF'
-      @paletteWrapper.style.color = '#000'
-      @mainCanvas.style.backgroundColor = '#FFF'
-      @paletteCanvas.style.backgroundColor = '#FFF'
-      @cursorPath.element.setAttribute 'stroke', '#000'
-      @gutter.style.backgroundColor = '#EBEBEB'
-      @gutter.style.color = '#000'
-      @setTopNubbyStyle 10, '#EBEBEB'
-
+    @refreshSessionColors()
 
     # Preparse loop
     if @worker?
@@ -536,6 +517,31 @@ exports.Editor = class Editor
 
     return this
 
+  # Invert session colors if necessary
+  refreshSessionColors: ->
+    if @session? and @session.view.opts.invert
+      @dropletElement.style.backgroundColor = '#181818'
+      @dropletElement.style.color = '#FFF'
+      @paletteWrapper.style.backgroundColor = '#181818'
+      @paletteWrapper.style.color = '#FFF'
+      @mainCanvas.style.backgroundColor = '#181818'
+      @paletteCanvas.style.backgroundColor = '#181818'
+      @cursorPath.element.setAttribute 'stroke', '#FFF'
+      @gutter.style.backgroundColor = '#303130'
+      @gutter.style.color = '#EEE'
+      @setTopNubbyStyle 10, '#303130'
+    else
+      @dropletElement.style.backgroundColor = '#FFF'
+      @dropletElement.style.color = '#000'
+      @paletteWrapper.style.backgroundColor = '#FFF'
+      @paletteWrapper.style.color = '#000'
+      @mainCanvas.style.backgroundColor = '#FFF'
+      @paletteCanvas.style.backgroundColor = '#FFF'
+      @cursorPath.element.setAttribute 'stroke', '#000'
+      @gutter.style.backgroundColor = '#EBEBEB'
+      @gutter.style.color = '#000'
+      @setTopNubbyStyle 10, '#EBEBEB'
+    
   setMode: (mode, modeOptions) ->
     modeClass = modes[mode]
     if modeClass
@@ -634,26 +640,8 @@ exports.Editor = class Editor
 
     return unless session?
 
-    if @session.view.opts.invert
-      @dropletElement.style.backgroundColor = '#181818'
-      @paletteWrapper.style.backgroundColor = '#181818'
-      @paletteWrapper.style.color = '#FFF'
-      @mainCanvas.style.backgroundColor = '#181818'
-      @paletteCanvas.style.backgroundColor = '#181818'
-      @cursorPath.element.setAttribute 'stroke', '#FFF'
-      @gutter.style.backgroundColor = '#303130'
-      @gutter.style.color = '#EEE'
-      @setTopNubbyStyle 10, '#303130'
-    else
-      @dropletElement.style.backgroundColor = '#FFF'
-      @paletteWrapper.style.backgroundColor = '#FFF'
-      @paletteWrapper.style.color = '#000'
-      @mainCanvas.style.backgroundColor = '#FFF'
-      @paletteCanvas.style.backgroundColor = '#FFF'
-      @cursorPath.element.setAttribute 'stroke', '#000'
-      @gutter.style.backgroundColor = '#EBEBEB'
-      @gutter.style.color = '#000'
-      @setTopNubbyStyle 10, '#EBEBEB'
+    # Update session for inversion
+    @refreshSessionColors()
 
     # Force scroll into our position
     offsetY = @session.viewports.main.y
