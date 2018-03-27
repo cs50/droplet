@@ -3775,7 +3775,7 @@ hook 'keydown', 0, (event, state) ->
 
       @newHandwrittenSocket = newSocket
 
-    else if @cursorAtSocket() and not event.shiftKey
+    else if @cursorAtSocket() # and not event.shiftKey
       socket = @getCursor()
       @hiddenInput.blur()
       @dropletElement.focus()
@@ -4823,7 +4823,7 @@ Editor::getValue = ->
     if @session._waitingForPreparse
       return @addEmptyLine @_lastSetValue
     else
-      return @addEmptyLine @session.tree.stringify({
+      return @addEmptyLine @session.tree.stringifyInPlace({
         preserveEmpty: @session.options.preserveEmpty
       })
   else
