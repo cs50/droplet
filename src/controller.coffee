@@ -459,7 +459,7 @@ exports.Editor = class Editor
       document.body.addEventListener 'mousemove', mousemoveListener
       document.body.addEventListener 'mouseup', mouseupListener
 
-      event.preventDefault()
+      downEvent.preventDefault()
 
     # Now that we've populated everything, immediately redraw.
     @redrawMain()
