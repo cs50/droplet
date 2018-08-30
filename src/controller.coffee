@@ -4623,6 +4623,7 @@ Session::clearLineMarks = ->
   @view.clearMarks()
 
 Editor::clearLineMarks = ->
+  return unless @session?
   @session.clearLineMarks()
 
   @redrawMain()
